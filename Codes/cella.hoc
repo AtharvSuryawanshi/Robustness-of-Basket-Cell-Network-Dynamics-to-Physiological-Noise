@@ -1,0 +1,119 @@
+proc celldef() {
+  topol()
+  subsets()
+  geom()
+  biophys()
+  geom_nseg()
+}
+
+create somaa, dend1a, dend2a, dend3a[9], dend4a[10]
+
+proc topol() { local i
+  connect dend1a(0), somaa(0)
+  connect dend2a(0), somaa(1)
+  connect dend3a(0), somaa(0)
+  for i = 1, 2 connect dend3a[i](0), dend3a[i-1](1)
+  connect dend3a[3](0), dend3a[1](1)
+  connect dend3a[4](0), dend3a(1)
+  for i = 5, 6 connect dend3a[i](0), dend3a[i-1](1)
+  connect dend3a[7](0), dend3a[5](1)
+  connect dend3a[8](0), dend3a[4](1)
+  connect dend4a(0), somaa(1)
+  for i = 1, 3 connect dend4a[i](0), dend4a[i-1](1)
+  connect dend4a[4](0), dend4a[2](1)
+  connect dend4a[5](0), dend4a[1](1)
+  for i = 6, 7 connect dend4a[i](0), dend4a[5](1)
+  for i = 8, 9 connect dend4a[i](0), dend4a[7](1)
+  basic_shape()
+}
+proc basic_shape() {
+  somaa {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}
+  dend1a {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-44, -149, 0, 1)}
+  dend2a {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(75, -149, 0, 1)}
+  dend3a {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-14, 15, 0, 1)}
+  dend3a[1] {pt3dclear() pt3dadd(-14, 15, 0, 1) pt3dadd(-89, 120, 0, 1)}
+  dend3a[2] {pt3dclear() pt3dadd(-89, 120, 0, 1) pt3dadd(-119, 135, 0, 1)}
+  dend3a[3] {pt3dclear() pt3dadd(-89, 120, 0, 1) pt3dadd(-104, 165, 0, 1)}
+  dend3a[4] {pt3dclear() pt3dadd(-14, 15, 0, 1) pt3dadd(-14, 45, 0, 1)}
+  dend3a[5] {pt3dclear() pt3dadd(-14, 45, 0, 1) pt3dadd(-44, 120, 0, 1)}
+  dend3a[6] {pt3dclear() pt3dadd(-44, 120, 0, 1) pt3dadd(-74, 150, 0, 1)}
+  dend3a[7] {pt3dclear() pt3dadd(-44, 120, 0, 1) pt3dadd(-59, 165, 0, 1)}
+  dend3a[8] {pt3dclear() pt3dadd(-14, 45, 0, 1) pt3dadd(0, 165, 0, 1)}
+  dend4a {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(30, 30, 0, 1)}
+  dend4a[1] {pt3dclear() pt3dadd(30, 30, 0, 1) pt3dadd(45, 60, 0, 1)}
+  dend4a[2] {pt3dclear() pt3dadd(45, 60, 0, 1) pt3dadd(45, 135, 0, 1)}
+  dend4a[3] {pt3dclear() pt3dadd(45, 135, 0, 1) pt3dadd(30, 165, 0, 1)}
+  dend4a[4] {pt3dclear() pt3dadd(45, 135, 0, 1) pt3dadd(75, 150, 0, 1)}
+  dend4a[5] {pt3dclear() pt3dadd(45, 60, 0, 1) pt3dadd(60, 75, 0, 1)}
+  dend4a[6] {pt3dclear() pt3dadd(60, 75, 0, 1) pt3dadd(60, 165, 0, 1)}
+  dend4a[7] {pt3dclear() pt3dadd(60, 75, 0, 1) pt3dadd(105, 150, 0, 1)}
+  dend4a[8] {pt3dclear() pt3dadd(105, 150, 0, 1) pt3dadd(60, 195, 0, 1)}
+  dend4a[9] {pt3dclear() pt3dadd(105, 150, 0, 1) pt3dadd(135, 195, 0, 1)}
+}
+proc position() { local i, x, y, z
+  x = x3d(0)  y = y3d(0)  z = z3d(0)
+  for i = 0, n3d()-1 {
+    pt3dchange(i, $1-x+x3d(i), $2-y+y3d(i), $3-z+z3d(i), diam3d(i))
+  }
+}  
+
+
+objref all
+proc subsets() { local i
+  objref all
+  all = new SectionList()
+
+}
+proc geom() {
+  somaa {  /*area = 1000 */ L = diam = 17.8412  }
+  dend1a {  L = 301.79  diam = 1.1839  }
+  dend2a {  L = 336.59  diam = 1.2684  }
+  dend3a {  L = 26.962  diam = 1.7231  }
+  dend3a[1] {  L = 341.15  diam = 2  }
+  dend3a[2] {  L = 72.155  diam = 1.0547  }
+  dend3a[3] {  L = 99.341  diam = 1.004  }
+  dend3a[4] {  L = 23.133  diam = 2  }
+  dend3a[5] {  L = 214.38  diam = 2  }
+  dend3a[6] {  L = 187.79  diam = 0.90954  }
+  dend3a[7] {  L = 131.39  diam = 0.92304  }
+  dend3a[8] {  L = 366.07  diam = 1.7639  }
+  dend4a {  L = 19.975  diam = 1.6653  }
+  dend4a[1] {  L = 25.821  diam = 5  }
+  dend4a[2] {  L = 278.6  diam = 2.1053  }
+  dend4a[3] {  L = 151.32  diam = 0.98245  }
+  dend4a[4] {  L = 70.834  diam = 1.0067  }
+  dend4a[5] {  L = 32.708  diam = 3.0486  }
+  dend4a[6] {  L = 333.13  diam = 0.97876  }
+  dend4a[7] {  L = 201.11  diam = 2  }
+  dend4a[8] {  L = 222.95  diam = 1.3644  }
+  dend4a[9] {  L = 169.17  diam = 1.4889  }
+}
+proc geom_nseg() {
+   dend1a { nseg = 31  }
+   dend2a { nseg = 34  }
+   dend3a { nseg = 3  }
+   dend3a[1] { nseg = 34  }
+   dend3a[2] { nseg = 8  }
+   dend3a[3] { nseg = 10  }
+   dend3a[4] { nseg = 3  }
+   dend3a[5] { nseg = 22  }
+   dend3a[6] { nseg = 19  }
+   dend3a[7] { nseg = 14  }
+   dend3a[8] { nseg = 37  }
+   dend4a { nseg = 2  }
+   dend4a[1] { nseg = 3  }
+   dend4a[2] { nseg = 28  }
+   dend4a[3] { nseg = 16  }
+   dend4a[4] { nseg = 8  }
+   dend4a[5] { nseg = 4  }
+   dend4a[6] { nseg = 34  }
+   dend4a[7] { nseg = 21  }
+   dend4a[8] { nseg = 23  }
+   dend4a[9] { nseg = 17  }
+}
+proc biophys() {
+}
+
+access somaa
+
+celldef()

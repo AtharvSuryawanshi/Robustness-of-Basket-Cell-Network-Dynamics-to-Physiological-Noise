@@ -1,0 +1,111 @@
+proc celldef() {
+  topol()
+  subsets()
+  geom()
+  biophys()
+  geom_nseg()
+}
+
+create somab, dend1b, dend2b, dend3b[9], dend4b[10]
+
+proc topol() { local i
+  connect dend1b(0), somab(0)
+  connect dend2b(0), somab(1)
+  connect dend3b(0), somab(0)
+  for i = 1, 2 connect dend3b[i](0), dend3b[i-1](1)
+  connect dend3b[3](0), dend3b[1](1)
+  connect dend3b[4](0), dend3b(1)
+  for i = 5, 6 connect dend3b[i](0), dend3b[i-1](1)
+  connect dend3b[7](0), dend3b[5](1)
+  connect dend3b[8](0), dend3b[4](1)
+  connect dend4b(0), somab(1)
+  for i = 1, 3 connect dend4b[i](0), dend4b[i-1](1)
+  connect dend4b[4](0), dend4b[2](1)
+  connect dend4b[5](0), dend4b[1](1)
+  for i = 6, 7 connect dend4b[i](0), dend4b[5](1)
+  for i = 8, 9 connect dend4b[i](0), dend4b[7](1)
+  basic_shape()
+}
+proc basic_shape() {
+  somab {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(15, 0, 0, 1)}
+  dend1b {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-44, -149, 0, 1)}
+  dend2b {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(75, -149, 0, 1)}
+  dend3b {pt3dclear() pt3dadd(0, 0, 0, 1) pt3dadd(-14, 15, 0, 1)}
+  dend3b[1] {pt3dclear() pt3dadd(-14, 15, 0, 1) pt3dadd(-89, 120, 0, 1)}
+  dend3b[2] {pt3dclear() pt3dadd(-89, 120, 0, 1) pt3dadd(-119, 135, 0, 1)}
+  dend3b[3] {pt3dclear() pt3dadd(-89, 120, 0, 1) pt3dadd(-104, 165, 0, 1)}
+  dend3b[4] {pt3dclear() pt3dadd(-14, 15, 0, 1) pt3dadd(-14, 45, 0, 1)}
+  dend3b[5] {pt3dclear() pt3dadd(-14, 45, 0, 1) pt3dadd(-44, 120, 0, 1)}
+  dend3b[6] {pt3dclear() pt3dadd(-44, 120, 0, 1) pt3dadd(-74, 150, 0, 1)}
+  dend3b[7] {pt3dclear() pt3dadd(-44, 120, 0, 1) pt3dadd(-59, 165, 0, 1)}
+  dend3b[8] {pt3dclear() pt3dadd(-14, 45, 0, 1) pt3dadd(0, 165, 0, 1)}
+  dend4b {pt3dclear() pt3dadd(15, 0, 0, 1) pt3dadd(30, 30, 0, 1)}
+  dend4b[1] {pt3dclear() pt3dadd(30, 30, 0, 1) pt3dadd(45, 60, 0, 1)}
+  dend4b[2] {pt3dclear() pt3dadd(45, 60, 0, 1) pt3dadd(45, 135, 0, 1)}
+  dend4b[3] {pt3dclear() pt3dadd(45, 135, 0, 1) pt3dadd(30, 165, 0, 1)}
+  dend4b[4] {pt3dclear() pt3dadd(45, 135, 0, 1) pt3dadd(75, 150, 0, 1)}
+  dend4b[5] {pt3dclear() pt3dadd(45, 60, 0, 1) pt3dadd(60, 75, 0, 1)}
+  dend4b[6] {pt3dclear() pt3dadd(60, 75, 0, 1) pt3dadd(60, 165, 0, 1)}
+  dend4b[7] {pt3dclear() pt3dadd(60, 75, 0, 1) pt3dadd(105, 150, 0, 1)}
+  dend4b[8] {pt3dclear() pt3dadd(105, 150, 0, 1) pt3dadd(60, 195, 0, 1)}
+  dend4b[9] {pt3dclear() pt3dadd(105, 150, 0, 1) pt3dadd(135, 195, 0, 1)}
+}
+
+objref all
+proc subsets() { local i
+  objref all
+  all = new SectionList()
+
+}
+proc geom() {
+  somab {  /*area = 1000 */ L = diam = 17.8412  }
+  dend1b {  L = 301.79  diam = 1.1839  }
+  dend2b {  L = 336.59  diam = 1.2684  }
+  dend3b {  L = 26.962  diam = 1.7231  }
+  dend3b[1] {  L = 341.15  diam = 2  }
+  dend3b[2] {  L = 72.155  diam = 1.0547  }
+  dend3b[3] {  L = 99.341  diam = 1.004  }
+  dend3b[4] {  L = 23.133  diam = 2  }
+  dend3b[5] {  L = 214.38  diam = 2  }
+  dend3b[6] {  L = 187.79  diam = 0.90954  }
+  dend3b[7] {  L = 131.39  diam = 0.92304  }
+  dend3b[8] {  L = 366.07  diam = 1.7639  }
+  dend4b {  L = 19.975  diam = 1.6653  }
+  dend4b[1] {  L = 25.821  diam = 5  }
+  dend4b[2] {  L = 278.6  diam = 2.1053  }
+  dend4b[3] {  L = 151.32  diam = 0.98245  }
+  dend4b[4] {  L = 70.834  diam = 1.0067  }
+  dend4b[5] {  L = 32.708  diam = 3.0486  }
+  dend4b[6] {  L = 333.13  diam = 0.97876  }
+  dend4b[7] {  L = 201.11  diam = 2  }
+  dend4b[8] {  L = 222.95  diam = 1.3644  }
+  dend4b[9] {  L = 169.17  diam = 1.4889  }
+}
+proc geom_nseg() {
+   dend1b { nseg = 31  }
+   dend2b { nseg = 34  }
+   dend3b { nseg = 3  }
+   dend3b[1] { nseg = 34  }
+   dend3b[2] { nseg = 8  }
+   dend3b[3] { nseg = 10  }
+   dend3b[4] { nseg = 3  }
+   dend3b[5] { nseg = 22  }
+   dend3b[6] { nseg = 19  }
+   dend3b[7] { nseg = 14  }
+   dend3b[8] { nseg = 37  }
+   dend4b { nseg = 2  }
+   dend4b[1] { nseg = 3  }
+   dend4b[2] { nseg = 28  }
+   dend4b[3] { nseg = 16  }
+   dend4b[4] { nseg = 8  }
+   dend4b[5] { nseg = 4  }
+   dend4b[6] { nseg = 34  }
+   dend4b[7] { nseg = 21  }
+   dend4b[8] { nseg = 23  }
+   dend4b[9] { nseg = 17  }
+}
+proc biophys() {
+}
+access somab
+
+celldef()
